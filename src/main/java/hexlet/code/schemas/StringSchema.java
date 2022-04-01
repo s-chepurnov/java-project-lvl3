@@ -1,18 +1,17 @@
 package hexlet.code.schemas;
 
-public class StringSchema {
-
-    public boolean required = false;
-    public String substr = "";
+public final class StringSchema {
+    private boolean required = false;
+    private String substr = "";
 
     public boolean isValid(String str) {
         boolean isEmpty = (str == null || str.isEmpty());
         if (required) {
-            if(isEmpty) {
+            if (isEmpty) {
                 return false;
             }
         } else {
-            if(isEmpty) {
+            if (isEmpty) {
                 return true;
             }
         }
@@ -27,6 +26,14 @@ public class StringSchema {
     public StringSchema contains(String str) {
         substr = str;
         return this;
+    }
+
+    public boolean isRequired() {
+        return required;
+    }
+
+    public String getSubstr() {
+        return substr;
     }
 
 }
