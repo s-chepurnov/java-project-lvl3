@@ -8,8 +8,4 @@ public final class Validator {
         return new StringSchema();
     }
 
-    public boolean isValid(Object obj) {
-        return false;
-    }
-
 }
