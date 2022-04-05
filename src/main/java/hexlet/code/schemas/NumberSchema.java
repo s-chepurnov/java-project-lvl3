@@ -24,7 +24,7 @@ public final class NumberSchema extends BaseSchema {
         }
 
         if (positive) {
-            if (!isEmpty && num < 0) {
+            if (!isEmpty && num <= 0) {
                 return false;
             }
         }

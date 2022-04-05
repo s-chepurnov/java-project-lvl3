@@ -47,6 +47,7 @@ public class AppTest {
 
         assertThat(schema.isValid(null)).isFalse(); // false
 
+        final int zero = 0;
         final int ten = 10;
         final int five = 5;
         final int four = 4;
@@ -56,6 +57,7 @@ public class AppTest {
 
         assertThat(schema.positive().isValid(ten)).isTrue(); // true
         assertThat(schema.isValid(-ten)).isFalse(); // false
+        assertThat(schema.isValid(zero)).isFalse(); // false
 
         schema.range(five, ten);
 
