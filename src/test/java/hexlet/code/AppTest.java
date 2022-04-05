@@ -32,6 +32,9 @@ public class AppTest {
         assertThat(schema.contains("whatthe").isValid("what does the fox say")).isFalse();
 
         assertThat(schema.isValid("what does the fox say")).isFalse();
+
+        schema.minLength(2);
+        assertThat(schema.contains("what").isValid("what does the fox say")).isTrue();
     }
 
     @Test
