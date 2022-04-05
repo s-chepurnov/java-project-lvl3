@@ -1,26 +1,24 @@
 package hexlet.code.schemas;
 
-public final class StringSchema {
-    private boolean required = false;
+public final class StringSchema extends BaseSchema {
     private String substr = "";
 
-    public boolean isValid(String str) {
+    @Override
+    public boolean isValid(Object input) {
+        if (!super.isValid(input)) {
+            return false;
+        }
+
+        String str = (String) input;
         boolean isEmpty = (str == null || str.isEmpty());
-        if (required) {
-            if (isEmpty) {
+
+        if (!substr.isEmpty()) {
+            if (!isEmpty && !str.contains(substr)) {
                 return false;
-            }
-        } else {
-            if (isEmpty) {
-                return true;
             }
         }
 
-        return str.contains(substr);
-    }
-
-    public void required() {
-        required = true;
+        return true;
     }
 
     public StringSchema contains(String str) {
@@ -28,12 +26,12 @@ public final class StringSchema {
         return this;
     }
 
-    public boolean isRequired() {
-        return required;
+    public StringSchema required() {
+        super.setRequired(true);
+        return this;
     }
 
     public String getSubstr() {
         return substr;
     }
-
 }
