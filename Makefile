@@ -1,22 +1,20 @@
 install:
-	./gradlew clean install
+	make -C app ./gradlew clean install
 
 run-dist:
-	./build/install/app/bin/app
+	make -C app ./build/install/app/bin/app
 
 check-updates:
-	./gradlew dependencyUpdates
+	make -C app dependencyUpdates
 
 lint:
-	./gradlew checkstyleMain
+	make -C app checkstyleMain
 
 build:
-	./gradlew clean build
+	make -C app clean build
 
 test:
-	./gradlew test
+	make -C app test
 
 report:
-	./gradlew jacocoTestReport
-
-.PHONY: build
+	make -C app report
