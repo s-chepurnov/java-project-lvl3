@@ -1,17 +1,17 @@
 install:
-	make -C app ./gradlew clean install
+	make -C app install
 
 run-dist:
-	make -C app ./build/install/app/bin/app
+	make -C app run-dist
 
 check-updates:
-	make -C app dependencyUpdates
+	make -C app check-updates
 
 lint:
-	make -C app checkstyleMain
+	make -C app lint
 
 build:
-	make -C app clean build
+	make -C app build
 
 test:
 	make -C app test
