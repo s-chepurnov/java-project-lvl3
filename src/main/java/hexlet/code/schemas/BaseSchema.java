@@ -1,35 +1,18 @@
 package hexlet.code.schemas;
 
-public class BaseSchema {
-    private boolean required = false;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.function.Predicate;
 
-    /**
-     * Check the input - does it valid or not.
-     * @param obj is an input to check
-     * @return isValid
-     */
-    public boolean isValid(Object obj) {
-        boolean isEmpty = false;
+public class BaseSchema <T>{
+    protected Map<String, Predicate<T>> checks = new LinkedHashMap<>();
 
-        if (obj == null) {
-            isEmpty = true;
-        } else if (obj.getClass() == String.class && ((String) obj).isEmpty()) {
-            isEmpty = true;
-        }
-
-        if (required && isEmpty) {
-            return false;
-        }
-
-        return true;
+    protected final void addCheck(String name, Predicate<T> check) {
+        checks.put(name, check);
     }
 
-    public final void setRequired(boolean isRequired) {
-        this.required = isRequired;
-    }
-
-    public final boolean isRequired() {
-        return required;
+    public final boolean isValid(T value) {
+        return checks.values().stream().allMatch(check -> check.test(value));
     }
 
 }
