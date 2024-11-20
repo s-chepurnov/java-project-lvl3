@@ -23,14 +23,14 @@ class AppTest {
         assertThat(schema.isValid("")).isFalse();
         assertThat(schema.isValid(null)).isFalse();
 
-        schema.minLength(toInt("7"));
+        schema.minLength(7);
         assertThat(schema.isValid("what does the fox say")).isTrue();
         assertThat(schema.isValid("hexlet")).isFalse();
 
         assertThat(schema.contains("what").isValid("what does the fox say")).isTrue();
         assertThat(schema.contains("whatthe").isValid("what does the fox say")).isFalse();
 
-        var schema1 = v.string().required().minLength(toInt("10")).minLength(toInt("4"));
+        var schema1 = v.string().required().minLength(10).minLength(4);
         assertThat(schema1.isValid("hexlet")).isTrue();
     }
 
@@ -39,7 +39,7 @@ class AppTest {
         var v = new Validator();
         var schema = v.number();
 
-        assertThat(schema.isValid(toInt("5"))).isTrue();
+        assertThat(schema.isValid(5)).isTrue();
         assertThat(schema.isValid(null)).isTrue();
 
         schema.positive();
@@ -47,19 +47,19 @@ class AppTest {
 
         schema.required();
         assertThat(schema.isValid(null)).isFalse();
-        assertThat(schema.isValid(toInt("-5"))).isFalse();
-        assertThat(schema.isValid(toInt("0"))).isFalse();
-        assertThat(schema.isValid(toInt("10"))).isTrue();
+        assertThat(schema.isValid(-5)).isFalse();
+        assertThat(schema.isValid(0)).isFalse();
+        assertThat(schema.isValid(10)).isTrue();
 
-        schema.range(toInt("5"), toInt("10"));
-        assertThat(schema.isValid(toInt("5"))).isTrue();
-        assertThat(schema.isValid(toInt("10"))).isTrue();
-        assertThat(schema.isValid(toInt("4"))).isFalse();
-        assertThat(schema.isValid(toInt("11"))).isFalse();
+        schema.range(5, 10);
+        assertThat(schema.isValid(5)).isTrue();
+        assertThat(schema.isValid(10)).isTrue();
+        assertThat(schema.isValid(4)).isFalse();
+        assertThat(schema.isValid(11)).isFalse();
 
-        schema.range(toInt("6"), toInt("9"));
-        assertThat(schema.isValid(toInt("5"))).isFalse();
-        assertThat(schema.isValid(toInt("5"))).isFalse();
+        schema.range(6,9 );
+        assertThat(schema.isValid(5)).isFalse();
+        assertThat(schema.isValid(5)).isFalse();
     }
 
     @Test
@@ -74,7 +74,7 @@ class AppTest {
         assertThat(schema.isValid(null)).isFalse();
         assertThat(schema.isValid(new HashMap<>())).isTrue();
 
-        schema.sizeof(toInt("2"));
+        schema.sizeof(2);
         assertThat(schema.isValid(new HashMap<>())).isFalse();
         Map<String, String> actual1 = new HashMap<>();
         actual1.put("key1", "value1");
@@ -101,11 +101,6 @@ class AppTest {
         actual4.put("firstName", "John");
         actual4.put("age", "B");
         assertThat(schema.isValid(actual4)).isFalse();
-    }
-
-    //to avoid linter errors "magic numbers"
-    public int toInt(String val) {
-        return Integer.parseInt(val);
     }
 
 }
