@@ -57,7 +57,7 @@ class AppTest {
         assertThat(schema.isValid(4)).isFalse();
         assertThat(schema.isValid(11)).isFalse();
 
-        schema.range(6,9 );
+        schema.range(6, 9);
         assertThat(schema.isValid(5)).isFalse();
         assertThat(schema.isValid(5)).isFalse();
     }
